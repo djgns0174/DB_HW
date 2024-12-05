@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>professor List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        button {
+            background-color: #f44336;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #d32f2f;
+        }
+
+        .add-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .add-button:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+<h1>Professor List</h1>
+
+<!-- 학생 추가 버튼 -->
+<a href="/professors/update" class="add-button">Add New professor</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>professor ID</th>
+        <th>Name</th>
+        <th>Major</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="professor : ${professors}">
+        <td th:text="${professor.professor_id}"></td>
+        <td th:text="${professor.name}"></td>
+        <td th:text="${professor.major}"></td>
+        <td>
+            <!-- 수정 버튼 -->
+            <a th:href="@{/professors/update/{id}(id=${professor.professor_id})}">Edit</a>
+            <!-- 삭제 버튼 -->
+            <form th:action="@{/professors/delete/{id}(id=${professor.professor_id})}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

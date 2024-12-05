@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Announcement Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        input[type="hidden"] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<h1 th:text="${announcement.id} != null ? 'Edit Announcement' : 'New Announcement'"></h1>
+
+<form th:action="@{/announcements/insert}" method="post" th:if="${announcement.id} == null">
+    <label>Title:</label>
+    <input type="text" placeholder="Title" th:value="${announcement.title}" name="title" required/>
+
+    <label>Content:</label>
+    <input type="text" placeholder="Content" th:value="${announcement.content}" name="content" required/>
+
+    <label>Announce Date:</label>
+    <input type="text" placeholder="2024-12-12"  th:value="${announcement.announce_date}" name="announce_date" required/>
+
+    <label>Writer:</label>
+    <input type="text" placeholder="2020039051" th:value="${announcement.writer}" name="writer" required/>
+
+    <button type="submit">Save</button>
+</form>
+
+<form th:action="@{/announcements/edit}" method="post" th:if="${announcement.id} != null">
+    <input type="hidden" th:value="${announcement.id}" name="id"/>
+
+    <label>Title:</label>
+    <input type="text"  placeholder="Title" th:value="${announcement.title}" name="title" required/>
+
+    <label>Content:</label>
+    <input type="text" placeholder="Content" th:value="${announcement.content}" name="content" required/>
+
+    <label>Announce Date:</label>
+    <input type="text" placeholder="2024-12-12" th:value="${announcement.announce_date}" name="announce_date" required/>
+
+    <label>Writer:</label>
+    <input type="text" placeholder="2020039051" th:value="${announcement.writer}" name="writer" required/>
+
+    <button type="submit">Save</button>
+</form>
+
+</body>
+</html>
