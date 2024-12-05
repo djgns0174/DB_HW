@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Event Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        form {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h1 class="form-header" th:text="${event.id} != null ? 'Edit Event' : 'New Event'"></h1>
+
+    <form th:action="@{/events/insert}" method="post" th:if="${event.id} == null">
+        <label>Name: <input type="text" placeholder="name" th:value="${event.name}" name="name" required/></label>
+        <label>Event Date: <input type="text" placeholder="2024-12-12" th:value="${event.event_date}" name="event_date" required/></label>
+        <label>Description: <input type="text" placeholder="description" th:value="${event.description}" name="description" required/></label>
+        <label>Participant Number: <input type="number" placeholder="30" th:value="${event.participant_number}" name="participant_number" required/></label>
+        <label>Location: <input type="text" placeholder="S4-1" th:value="${event.location}" name="location"/></label>
+        <label>Host Club: <input type="text" placeholder="club name" th:value="${event.host_club_name}" name="host_club_name"/></label>
+        <div class="form-actions">
+            <button type="submit">Save</button>
+        </div>
+    </form>
+
+    <form th:action="@{/events/edit}" method="post" th:if="${event.id} != null">
+        <input type="hidden" th:value="${event.id}" name="id"/>
+
+        <label>Name: <input type="text" placeholder="name" th:value="${event.name}" name="name" required/></label>
+        <label>Event Date: <input type="text" placeholder="2024-12-12" th:value="${event.event_date}" name="event_date" required/></label>
+        <label>Description: <input type="text" placeholder="description" th:value="${event.description}" name="description" required/></label>
+        <label>Participant Number: <input type="number" placeholder="30" th:value="${event.participant_number}" name="participant_number" required/></label>
+        <label>Location: <input type="text" placeholder="S4-1" th:value="${event.location}" name="location"/></label>
+        <label>Host Club: <input type="text" placeholder="club name" th:value="${event.host_club_name}" name="host_club_name"/></label>
+        <div class="form-actions">
+            <button type="submit">Save</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

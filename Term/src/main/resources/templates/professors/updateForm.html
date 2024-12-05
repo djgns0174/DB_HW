@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>professor Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        form {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+<h1 class="form-header" th:text="${professor.professor_id} != null ? 'Edit Professor' : 'New Professor'"></h1>
+
+<form th:action="@{/professors/insert}" method="post" th:if="${professor.professor_id} == null">
+    <label for="professor_id">professor ID:</label>
+    <input type="text" placeholder="110101" th:value="${professor.professor_id}" name="professor_id" required/>
+
+    <label for="name">Name:</label>
+    <input type="text" placeholder="nosy" th:value="${professor.name}" name="name"/>
+
+    <label for="major">Major:</label>
+    <input type="text" placeholder="DB" th:value="${professor.major}" name="major"/>
+
+    <button type="submit">Save</button>
+</form>
+
+<form th:action="@{/professors/edit}" method="post" th:if="${professor.professor_id} != null">
+    <input type="hidden" th:value="${professor.professor_id}" name="professor_id"/>
+
+    <label for="name">Name:</label>
+    <input type="text" placeholder="jooyehoon" th:value="${professor.name}" name="name" required/>
+
+    <label for="major">Major:</label>
+    <input type="text" placeholder="software" th:value="${professor.major}" name="major" required/>
+
+    <button type="submit">Save</button>
+</form>
+
+</body>
+</html>
