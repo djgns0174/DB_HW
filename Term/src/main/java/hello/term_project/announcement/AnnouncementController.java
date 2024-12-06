@@ -36,12 +36,19 @@ public class AnnouncementController {
 
     @PostMapping("/edit")
     public String editAnnouncement(@ModelAttribute Announcement announcement) {
+        if (announcement.getWriter() != null && announcement.getWriter().isEmpty()) {
+            announcement.setWriter(null);
+        }
         announcementRepository.updateAnnouncement(announcement);
         return "redirect:/announcements";
     }
 
     @PostMapping("/insert")
     public String insertAnnouncement(@ModelAttribute Announcement announcement) {
+        if (announcement.getWriter() != null && announcement.getWriter().isEmpty()) {
+            announcement.setWriter(null);
+        }
+
         announcementRepository.insertAnnouncement(announcement);
         return "redirect:/announcements";
     }

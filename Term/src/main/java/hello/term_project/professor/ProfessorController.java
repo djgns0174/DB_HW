@@ -22,7 +22,7 @@ public class ProfessorController {
     }
 
     @GetMapping("/update/{id}")
-    public String editProfessorForm(@PathVariable Integer id, Model model) {
+    public String editProfessorForm(@PathVariable String id, Model model) {
         Professor professor = professorRepository.getprofessor(id).orElseThrow(() -> new IllegalArgumentException("Invalid professor ID: " + id));
         model.addAttribute("professor", professor);
         return "professors/updateForm";
@@ -48,7 +48,7 @@ public class ProfessorController {
     }
 
     @PostMapping("/delete/{id}")
-    public String deleteProfessor(@PathVariable Integer id) {
+    public String deleteProfessor(@PathVariable String id) {
         professorRepository.deleteProfessor(id);
         return "redirect:/professors";
     }

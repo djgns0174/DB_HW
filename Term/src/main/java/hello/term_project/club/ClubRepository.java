@@ -31,7 +31,7 @@ public class ClubRepository {
             pstmt.setString(2, club.getDescription());
             pstmt.setString(3, club.getCreate_date());
             pstmt.setInt(4, club.getMember_number());
-            pstmt.setInt(5, club.getAdvisor_id());
+            pstmt.setString(5, club.getAdvisor_id());
             pstmt.setString(6, club.getPresident_id());
 
             pstmt.executeUpdate();
@@ -62,7 +62,7 @@ public class ClubRepository {
                 club.setDescription(rs.getString("description"));
                 club.setCreate_date(rs.getString("create_date"));
                 club.setMember_number(rs.getInt("member_number"));
-                club.setAdvisor_id(rs.getInt("advisor_id"));
+                club.setAdvisor_id(rs.getString("advisor_id"));
                 club.setPresident_id(rs.getString("president_id"));
 
                 clubs.add(club);
@@ -95,7 +95,7 @@ public class ClubRepository {
                 club.setDescription(rs.getString("description"));
                 club.setCreate_date(rs.getString("create_date"));
                 club.setMember_number(rs.getInt("member_number"));
-                club.setAdvisor_id(rs.getInt("advisor_id"));
+                club.setAdvisor_id(rs.getString("advisor_id"));
                 club.setPresident_id(rs.getString("president_id"));
             }
 
@@ -149,7 +149,7 @@ public class ClubRepository {
             pstmt.setString(2, club.getDescription());
             pstmt.setString(3, club.getCreate_date());
             pstmt.setInt(4, club.getMember_number());
-            pstmt.setInt(5, club.getAdvisor_id());
+            pstmt.setString(5, club.getAdvisor_id());
             pstmt.setString(6, club.getPresident_id());
             pstmt.setString(7, oldName);
 

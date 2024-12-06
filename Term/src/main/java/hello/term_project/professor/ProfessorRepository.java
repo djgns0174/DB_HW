@@ -23,7 +23,7 @@ public class ProfessorRepository {
             Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             PreparedStatement pstmt = con.prepareStatement(sql);
 
-            pstmt.setInt(1, professor.getProfessor_id());
+            pstmt.setString(1, professor.getProfessor_id());
             pstmt.setString(2, professor.getName());
             pstmt.setString(3, professor.getMajor());
 
@@ -50,7 +50,7 @@ public class ProfessorRepository {
 
             while(rs.next()){
                 Professor professor = new Professor();
-                professor.setProfessor_id(rs.getInt("professor_id"));
+                professor.setProfessor_id(rs.getString("professor_id"));
                 professor.setName(rs.getString("name"));
                 professor.setMajor(rs.getString("major"));
 
@@ -66,7 +66,7 @@ public class ProfessorRepository {
         return professors;
     }
 
-    public Optional<Professor> getprofessor(Integer professor_id) {
+    public Optional<Professor> getprofessor(String professor_id) {
         String sql = "select * from professor where professor_id = ?";
 
         try{
@@ -74,13 +74,13 @@ public class ProfessorRepository {
             Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             PreparedStatement pstmt = con.prepareStatement(sql);
 
-            pstmt.setInt(1, professor_id);
+            pstmt.setString(1, professor_id);
 
             ResultSet rs = pstmt.executeQuery();
 
             Professor professor = new Professor();
             while(rs.next()){
-                professor.setProfessor_id(rs.getInt("professor_id"));
+                professor.setProfessor_id(rs.getString("professor_id"));
                 professor.setName(rs.getString("name"));
                 professor.setMajor(rs.getString("major"));
 
@@ -97,7 +97,7 @@ public class ProfessorRepository {
         return Optional.empty();
     }
 
-    public void deleteProfessor(Integer professor_id){
+    public void deleteProfessor(String professor_id){
 
         String sql = "delete from professor where professor_id = ?";
 
@@ -106,7 +106,7 @@ public class ProfessorRepository {
             Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             PreparedStatement pstmt = con.prepareStatement(sql);
 
-            pstmt.setInt(1, professor_id);
+            pstmt.setString(1, professor_id);
 
             int rowAffected = pstmt.executeUpdate();
 
@@ -133,7 +133,7 @@ public class ProfessorRepository {
 
             pstmt.setString(1, professor.getName());
             pstmt.setString(2, professor.getMajor());
-            pstmt.setInt(3, professor.getProfessor_id());
+            pstmt.setString(3, professor.getProfessor_id());
 
             int rowAffected = pstmt.executeUpdate();
 
