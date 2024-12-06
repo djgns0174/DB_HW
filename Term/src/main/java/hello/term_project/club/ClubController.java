@@ -36,12 +36,28 @@ public class ClubController {
 
     @PostMapping("/edit")
     public String editClub(@ModelAttribute Club club, @RequestParam String oldName) {
+        if (club.getAdvisor_id() != null && club.getAdvisor_id().isEmpty()) {
+            club.setAdvisor_id(null);
+        }
+
+        if(club.getPresident_id() != null && club.getPresident_id().isEmpty()){
+            club.setPresident_id(null);
+        }
+
         clubRepository.updateClub(club, oldName);
         return "redirect:/clubs";
     }
 
     @PostMapping("/insert")
     public String insertClub(@ModelAttribute Club club) {
+        if (club.getAdvisor_id() != null && club.getAdvisor_id().isEmpty()) {
+            club.setAdvisor_id(null);
+        }
+
+        if(club.getPresident_id() != null && club.getPresident_id().isEmpty()){
+            club.setPresident_id(null);
+        }
+
         clubRepository.insertClub(club);
         return "redirect:/clubs";
     }

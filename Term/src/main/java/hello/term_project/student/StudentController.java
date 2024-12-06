@@ -31,21 +31,24 @@ public class StudentController {
     @GetMapping("/update")
     public String insertStudentForm(Model model) {
         Student student = new Student();
-        student.setClub(null);
         model.addAttribute("student", student);
         return "students/updateForm";
     }
 
     @PostMapping("/edit")
     public String editStudent(@ModelAttribute Student student) {
+        if (student.getClub() != null && student.getClub().isEmpty()) {
+            student.setClub(null);
+        }
         studentRepository.updateStudent(student);
         return "redirect:/students";
     }
 
-
     @PostMapping("/insert")
     public String insertStudent(@ModelAttribute Student student) {
-        System.out.println(student.getClub());  //test
+        if (student.getClub() != null && student.getClub().isEmpty()) {
+            student.setClub(null);
+        }
         studentRepository.insertStudent(student);
         return "redirect:/students";
     }

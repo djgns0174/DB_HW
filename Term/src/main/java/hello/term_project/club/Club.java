@@ -15,6 +15,6 @@ public class Club {
     private String description;
     private String create_date;
     private int member_number;
-    private int advisor_id;
+    private String advisor_id;
     private String president_id;
 }

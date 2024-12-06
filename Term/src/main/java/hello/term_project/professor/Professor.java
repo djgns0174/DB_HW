@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Id;
 @Data
 public class Professor {
     @Id
-    private Integer professor_id;
+    private String professor_id;
     private String name;
     private String major;
 }
